@@ -1,31 +1,36 @@
 public class Rules {
-    private int[] birthRules;
-    private int[] survivalRules;
+    /*
+    The Rules class specifies rules using birthRules and survivalRules, boolean arrays
+    of length 9, where the index of each element that's set to true indicates the quantity
+    of neighbors that satisfies that aspect of the rules.
 
-    public Rules(int[] birthRules, int[] survivalRules){
-        this.birthRules = birthRules;
-        this.survivalRules = survivalRules;
+    For example, if the elements at index 2 and 3 in the survivalRules array are true,
+    it means that a live cell survives if it has 2 or 3 live neighbors surrounding it.
+    */
+
+    private static final int numNeighbors = 9;
+    private boolean[] birthRules;
+    private boolean[] survivalRules;
+
+    public Rules(int[] birthNeighbors, int[] survivalNeighbors){
+        birthRules = new boolean[numNeighbors];
+        survivalRules = new boolean[numNeighbors];
+
+        for (int neighbors : birthNeighbors) {
+            birthRules[neighbors] = true;
+        }
+        for (int neighbors : survivalNeighbors) {
+            survivalRules[neighbors] = true;
+        }
     }
 
     public CellState applyRules(CellState cellState, int liveNeighbors){
-        CellState newCellState = cellState;
-        if (cellState == CellState.DEAD){
-            for (int rule = 0; rule < birthRules.length; rule++){
-                if (liveNeighbors == birthRules[rule]){
-                    newCellState = CellState.WILL_REVIVE;
-                }
-            }
-        } else if (cellState == CellState.ALIVE){
-            boolean survives = false;
-            for (int rule = 0; rule < survivalRules.length; rule++){
-                if (liveNeighbors == survivalRules[rule]){
-                    survives = true;
-                }
-            }
-            if (!survives){
-                newCellState = CellState.WILL_DIE;
-            }
+        if (cellState == CellState.DEAD && birthRules[liveNeighbors]){
+            return CellState.WILL_REVIVE;
+        } else if (cellState == CellState.ALIVE && !survivalRules[liveNeighbors]){
+            return CellState.WILL_DIE;
+        } else {
+            return cellState;
         }
-        return newCellState;
     }
 }

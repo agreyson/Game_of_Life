@@ -8,11 +8,15 @@ public class GameOfLifeApp extends PApplet {
     private static final int CELL_SIZE = 10;
 
     public GameOfLifeApp(){
-        app = this;
         evolve = false;
     }
-    public static void main(String[] args) {
-        PApplet.main("GameOfLifeApp");
+    public static void main(String[] args){
+//        String[] processingArgs = {"GameOfLifeApp"};
+//        GameOfLifeApp mySketch = new GameOfLifeApp();
+//        app = mySketch;
+//        PApplet.runSketch(processingArgs, mySketch);
+        app = new GameOfLifeApp();
+        app.runSketch();
     }
 
     public void settings(){
@@ -23,10 +27,10 @@ public class GameOfLifeApp extends PApplet {
         frameRate(2);
 
         // establish rules
-        //Rules rules = new Rules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
+        Rules rules = new Rules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
         //Rules rules = new Rules(new int[]{1, 3, 5, 7}, new int[]{1, 3, 5, 7}); // B1357/S1357 Replicator
         //Rules rules = new Rules(new int[]{3, 6}, new int[]{2, 3}); // B36/S23 HighLife
-        Rules rules = new Rules(new int[]{2 }, new int[]{}); // B2/S Seeds
+        //Rules rules = new Rules(new int[]{2}, new int[]{}); // B2/S Seeds
         //Rules rules = new Rules(new int[]{1}, new int[]{1, 2}); // B1/S12 single live cell approximates Sierpiński triangle
 
         // Initialize the board
@@ -37,8 +41,8 @@ public class GameOfLifeApp extends PApplet {
                 if (row == 0 || row == (cells.length - 1) || column == 0 || column == (cells[0].length - 1)){
                     cellState = CellState.DEAD; // need to create a neutral border
                 } else {
-                    //cellState = CellState.randomState();
-                    cellState = CellState.DEAD;
+                    cellState = CellState.randomState();
+                    //cellState = CellState.DEAD;
                 }
                 Cell cell = new Cell(column * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
                 cells[row][column] = cell;
