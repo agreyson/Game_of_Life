@@ -26,13 +26,12 @@ public class MooreRules extends Rules {
         }
     }
 
-    public CellState applyRules(CellState cellState, int liveNeighbors){
-        if (cellState == CellState.DEAD && birthRules[liveNeighbors] == true){
-            return CellState.WILL_REVIVE;
-        } else if (cellState == CellState.ALIVE && survivalRules[liveNeighbors] == false){
-            return CellState.WILL_DIE;
-        } else {
-            return cellState;
-        }
+    public boolean shouldBeBorn(int liveNeighbors) {
+        return birthRules[liveNeighbors];
     }
+
+    public boolean shouldSurvive(int liveNeighbors) {
+        return survivalRules[liveNeighbors];
+    }
+
 }

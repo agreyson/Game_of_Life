@@ -41,8 +41,8 @@ public class GameOfLifeApp extends PApplet {
                 if (row == 0 || row == (cells.length - 1) || column == 0 || column == (cells[0].length - 1)){
                     cellState = CellState.DEAD; // need to create a neutral border
                 } else {
-                    cellState = CellState.randomState();
-                    //cellState = CellState.DEAD;
+                    //cellState = CellState.randomState();
+                    cellState = CellState.DEAD;
                 }
                 Cell cell = new Cell(column * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
                 cells[row][column] = cell;
