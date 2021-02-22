@@ -27,7 +27,7 @@ public class GameOfLifeApp extends PApplet {
         frameRate(2);
 
         // establish rules
-        Rules rules = new Rules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
+        Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
         //Rules rules = new Rules(new int[]{1, 3, 5, 7}, new int[]{1, 3, 5, 7}); // B1357/S1357 Replicator
         //Rules rules = new Rules(new int[]{3, 6}, new int[]{2, 3}); // B36/S23 HighLife
         //Rules rules = new Rules(new int[]{2}, new int[]{}); // B2/S Seeds
