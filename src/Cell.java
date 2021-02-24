@@ -58,6 +58,21 @@ public class Cell {
 
     private int countLiveNeighbors(Cell[][] cells){
         int liveNeighbors = 0;
+
+        Cell c;
+        for (int rowOffset = -1; rowOffset <= 1; rowOffset++){
+            for (int columnOffset = -1; columnOffset <= 1; columnOffset++){
+                c = cells[row + rowOffset][column + columnOffset];
+                if (c.cellState == CellState.ALIVE || c.cellState == CellState.WILL_DIE){
+                    // must test for WILL_DIE, too, in case cell is currently alive but flagged to die during next evolution
+                    liveNeighbors++;
+                }
+            }
+        }
+        if (this.cellState == CellState.ALIVE){
+            liveNeighbors -= 1;
+        }
+        /*
         if ((cells[row-1][column].cellState == CellState.ALIVE) || (cells[row-1][column].cellState == CellState.WILL_DIE)){ // upper cell
             liveNeighbors += 1;
         }
@@ -82,6 +97,8 @@ public class Cell {
         if ((cells[row+1][column+1].cellState == CellState.ALIVE) || (cells[row+1][column+1].cellState == CellState.WILL_DIE)){ // lower right cell
             liveNeighbors += 1;
         }
+        */
+
         return liveNeighbors;
     }
 

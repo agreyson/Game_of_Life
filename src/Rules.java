@@ -1,5 +1,5 @@
 public abstract class Rules {
-
+    // works for any dimension
     public abstract boolean shouldBeBorn(int liveNeighbors);
     public abstract boolean shouldSurvive(int liveNeighbors);
 
