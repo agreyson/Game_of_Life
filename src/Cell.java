@@ -20,11 +20,6 @@ public class Cell {
     public void applyRules(Cell[][] cells){
         int liveNeighbors = countLiveNeighbors(cells);
         cellState = rules.applyRules(cellState, liveNeighbors);
-//        if (cellState == CellState.ALIVE && (liveNeighbors < 2 || liveNeighbors > 3)){ // live cell dies if under or overpopulated
-//            cellState = CellState.WILL_DIE;
-//        } else if (cellState == CellState.DEAD && liveNeighbors == 3){ // dead cell with 3 neighbors comes alive
-//            cellState = CellState.WILL_REVIVE;
-//        }
     }
 
     public void evolve(){

@@ -1,15 +1,11 @@
 import processing.core.PApplet;
 
 public class GameOfLifeApp extends PApplet {
+    private static final int CELL_SIZE = 20;
     private static GameOfLifeApp app; // reference to itself
     private Cell[][] cells;
     private boolean evolve;
 
-    private static final int CELL_SIZE = 10;
-
-    public GameOfLifeApp(){
-        evolve = false;
-    }
     public static void main(String[] args){
 //        String[] processingArgs = {"GameOfLifeApp"};
 //        GameOfLifeApp mySketch = new GameOfLifeApp();
@@ -19,8 +15,12 @@ public class GameOfLifeApp extends PApplet {
         app.runSketch();
     }
 
+    public GameOfLifeApp(){
+        evolve = false;
+    }
+
     public void settings(){
-        size(1000, 500);
+        size(800, 400);
     }
 
     public void setup(){
@@ -28,10 +28,10 @@ public class GameOfLifeApp extends PApplet {
 
         // establish rules
         Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
-        //Rules rules = new Rules(new int[]{1, 3, 5, 7}, new int[]{1, 3, 5, 7}); // B1357/S1357 Replicator
-        //Rules rules = new Rules(new int[]{3, 6}, new int[]{2, 3}); // B36/S23 HighLife
-        //Rules rules = new Rules(new int[]{2}, new int[]{}); // B2/S Seeds
-        //Rules rules = new Rules(new int[]{1}, new int[]{1, 2}); // B1/S12 single live cell approximates Sierpiński triangle
+        //Rules rules = new MooreRules(new int[]{1, 3, 5, 7}, new int[]{1, 3, 5, 7}); // B1357/S1357 Replicator
+        //Rules rules = new MooreRules(new int[]{3, 6}, new int[]{2, 3}); // B36/S23 HighLife
+        //Rules rules = new MooreRules(new int[]{2}, new int[]{}); // B2/S Seeds
+        //Rules rules = new MooreRules(new int[]{1}, new int[]{1, 2}); // B1/S12 single live cell approximates Sierpiński triangle
 
         // Initialize the board
         cells = new Cell[height/CELL_SIZE][width/CELL_SIZE];
