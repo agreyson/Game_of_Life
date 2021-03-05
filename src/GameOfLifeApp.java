@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 public class GameOfLifeApp extends PApplet {
-    private static final int CELL_SIZE = 20;
+    private static final int CELL_SIZE = 10;
     private static GameOfLifeApp app; // reference to itself
     private Cell[][] cells;
     private boolean evolve;
@@ -20,11 +20,11 @@ public class GameOfLifeApp extends PApplet {
     }
 
     public void settings(){
-        size(800, 400);
+        size(1000, 500);
     }
 
     public void setup(){
-        frameRate(2);
+       // frameRate(5);
 
         // establish rules
         Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
@@ -44,7 +44,13 @@ public class GameOfLifeApp extends PApplet {
                     //cellState = CellState.randomState();
                     cellState = CellState.DEAD;
                 }
-                Cell cell = new Cell(column * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
+                // a hack to make a single cell be the ant when simulating Langton's Ant
+                boolean isAnt = false;
+                if (row == 25 && column == 50) {
+                    isAnt = true;
+                }
+                //Cell cell = new Cell (column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
+                Cell cell = new LangtonCell(column * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, row, column, cellState, isAnt);
                 cells[row][column] = cell;
             }
         }

@@ -51,6 +51,38 @@ public class Cell {
         }
     }
 
+    public Rules getRules() {
+        return rules;
+    }
+
+    public CellState getCellState() {
+        return cellState;
+    }
+
+    public void setCellState(CellState cellState) {
+        this.cellState = cellState;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     private int countLiveNeighbors(Cell[][] cells){
         int liveNeighbors = 0;
 
@@ -96,5 +128,4 @@ public class Cell {
 
         return liveNeighbors;
     }
-
 }
