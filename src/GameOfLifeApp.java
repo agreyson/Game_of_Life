@@ -24,7 +24,7 @@ public class GameOfLifeApp extends PApplet {
     }
 
     public void setup(){
-       // frameRate(5);
+       //frameRate(5);
 
         // establish rules
         Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life

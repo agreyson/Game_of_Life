@@ -1,9 +1,11 @@
 public class LangtonCell extends Cell {
+    private final static LangtonRules rules = new LangtonRules();
+
     private Heading heading;
     private boolean isAnt;
 
     public LangtonCell(int x, int y, int size, int row, int column, CellState cellState, boolean isAnt) {
-        super(x, y, size, row, column, cellState, new LangtonRules());
+        super(x, y, size, row, column, cellState, rules);
         this.isAnt = isAnt;
         if (isAnt) {
             heading = Heading.randomHeading();
@@ -19,18 +21,18 @@ public class LangtonCell extends Cell {
             Heading nextHeading = rules.nextHeading(heading, getCellState());
 
             // calculate the row and column of the next ant
-            int row = getRow();
-            int column = getColumn();
-            if (nextHeading == Heading.WEST) {
-                column = column - 1;
-            } else if (nextHeading == Heading.SOUTH) {
-                row = row + 1;
-            } else if (nextHeading == Heading.EAST) {
-                column = column + 1;
-            } else { // Heading.NORTH
-                row = row - 1;
-            }
-            LangtonCell nextCell = (LangtonCell) cells[row][column];
+//            if (nextHeading == Heading.WEST) {
+//                column = column - 1;
+//            } else if (nextHeading == Heading.SOUTH) {
+//                row = row + 1;
+//            } else if (nextHeading == Heading.EAST) {
+//                column = column + 1;
+//            } else { // Heading.NORTH
+//                row = row - 1;
+//            }
+            int nextRow = getRow() + nextHeading.ROW_CHANGE;
+            int nextColumn = getColumn() + nextHeading.COLUMN_CHANGE;
+            LangtonCell nextCell = (LangtonCell) cells[nextRow][nextColumn];
 
             // Set its heading now as a flag to become the ant upon evolution
             nextCell.willBeAnt(nextHeading);
