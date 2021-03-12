@@ -20,11 +20,11 @@ public class GameOfLifeApp extends PApplet {
     }
 
     public void settings(){
-        size(1000, 500);
+        size(2000, 800);
     }
 
     public void setup(){
-       //frameRate(5);
+       frameRate(1000);
 
         // establish rules
         Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3}); // B3/S23 Game of Life
@@ -44,13 +44,16 @@ public class GameOfLifeApp extends PApplet {
                     //cellState = CellState.randomState();
                     cellState = CellState.DEAD;
                 }
-                // a hack to make a single cell be the ant when simulating Langton's Ant
+                // A hack to make one cell in the interior be the ant.
+                // Additional ants could be created by adding a compound conditional.
                 boolean isAnt = false;
                 if (row == 25 && column == 50) {
                     isAnt = true;
                 }
-                //Cell cell = new Cell (column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
+
+                // Either make a board of regular Cells, or a board of LangtonCells.
                 Cell cell = new LangtonCell(column * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, row, column, cellState, isAnt);
+                //Cell cell = new Cell (column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, row, column, cellState, rules);
                 cells[row][column] = cell;
             }
         }
